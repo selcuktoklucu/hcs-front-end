@@ -5,7 +5,8 @@ import './Header.scss'
 
 const authenticatedOptions = (
   <React.Fragment>
-    <Link to="/">Home</Link>
+    <Link to="/tasks">Tasks</Link>
+    <Link to="/new-task">New Task</Link>
     <Link to="/change-password">Change Password</Link>
     <Link to="/sign-out">Sign Out</Link>
   </React.Fragment>

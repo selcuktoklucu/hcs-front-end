@@ -8,13 +8,16 @@ import SignUp from './auth/components/SignUp'
 import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
-
+import NewTask from './tasks/components/NewTask'
 import AutoDismissAlert from './auth/autoDismissAlert.js'
 // import Alert from 'react-bootstrap/Alert'
+import Tasks from './tasks/components/IndexTasks'
+import ShowTask from './tasks/components/ShowTask'
+import EditTask from './tasks/components/EditTask'
 
 class App extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
     this.state = {
       user: null,
@@ -48,6 +51,18 @@ class App extends Component {
           )} />
           <Route path='/sign-in' render={() => (
             <SignIn alert={this.alert} setUser={this.setUser} />
+          )} />
+          <AuthenticatedRoute user={user} path='/new-task' render={() => (
+            <NewTask alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute exact user={user} path='/tasks' render={() => (
+            <Tasks alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute exact user={user} path='/tasks/:id' render={(match) => (
+            <ShowTask alert={this.alert} match={match.match} user={user} />
+          )} />
+          <AuthenticatedRoute exact user={user} path='/tasks/:id/edit' render={(match) => (
+            <EditTask alert={this.alert} match={match.match} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />
